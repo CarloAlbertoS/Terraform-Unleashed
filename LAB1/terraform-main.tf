@@ -1,4 +1,5 @@
 variable "client_secret" {
+  default= "E1t8Q~wNq3aMGM1xZx1iTdbqSOg5TsfrlVaV_bl_"
 }
 
 provider "azurerm" {
