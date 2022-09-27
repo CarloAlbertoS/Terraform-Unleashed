@@ -1,41 +1,44 @@
-variable "client_secret" {
-  default= "E1t8Q~wNq3aMGM1xZx1iTdbqSOg5TsfrlVaV_bl_"
+locals {
+  alumni_id = "${var.course}-${var.prefix}"
+  tag_poste = {
+    "environment" = "${var.environment}"
+    "user"        = "${var.prefix}"
+  }
 }
 
-provider "azurerm" {
-  features {
-    resource_group {
-      prevent_deletion_if_contains_resources = false
-    }
-  }
-  subscription_id = "fce6ec9b-1a97-4250-8ca9-6ea5cf77fe6c"
-  client_id       = "c2e6638d-61d7-4f66-9ae4-ecb579a3789e"
-  client_secret   = var.client_secret
-  tenant_id       = "a84c2bdc-6bba-49a2-a40f-8e993440da8e"
-}
 
 resource "azurerm_resource_group" "poste-tf" {
-  name     = "poste-tf-resources"
-  location = "North Europe"
+  name     = "${local.alumni_id}-resources"
+  location = var.poste_resource_group_location
+  tags     = var.tag_poste2
 }
 
 resource "azurerm_virtual_network" "poste-tf" {
-  name                = "poste-tf-network"
+  name                = "${local.alumni_id}-network"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.poste-tf.location
   resource_group_name = azurerm_resource_group.poste-tf.name
+  tags                = var.tag_poste2
 }
 
 resource "azurerm_subnet" "database" {
-  name                 = "database"
+  name                 = "${local.alumni_id}-database"
   resource_group_name  = azurerm_resource_group.poste-tf.name
   virtual_network_name = azurerm_virtual_network.poste-tf.name
   address_prefixes     = ["10.0.2.0/24"]
+
+}
+
+resource "azurerm_subnet" "webapp" {
+  name                 = "${local.alumni_id}-webapp"
+  resource_group_name  = azurerm_resource_group.poste-tf.name
+  virtual_network_name = azurerm_virtual_network.poste-tf.name
+  address_prefixes     = ["10.0.4.0/24"]
 }
 
 
 resource "azurerm_network_interface" "main" {
-  name                = "poste-tf-nic"
+  name                = "${local.alumni_id}-nic"
   location            = azurerm_resource_group.poste-tf.location
   resource_group_name = azurerm_resource_group.poste-tf.name
 
@@ -44,20 +47,23 @@ resource "azurerm_network_interface" "main" {
     subnet_id                     = azurerm_subnet.database.id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = var.tag_poste2
 }
 
+
+
 resource "azurerm_virtual_machine" "database" {
-  name                  = "poste-tf-vm"
+  name                  = "${local.alumni_id}-vm"
   location              = azurerm_resource_group.poste-tf.location
   resource_group_name   = azurerm_resource_group.poste-tf.name
   network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = "Standard_B1s"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
-  # delete_os_disk_on_termination = true
+  delete_os_disk_on_termination = true
 
   # Uncomment this line to delete the data disks automatically when deleting the VM
-  # delete_data_disks_on_termination = true
+  delete_data_disks_on_termination = true
 
   storage_image_reference {
     publisher = "Canonical"
@@ -70,6 +76,7 @@ resource "azurerm_virtual_machine" "database" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
+
   }
   os_profile {
     computer_name  = "hostname"
@@ -79,7 +86,5 @@ resource "azurerm_virtual_machine" "database" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-  tags = {
-    environment = "staging"
-  }
+  tags = var.tag_poste2
 }

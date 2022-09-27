@@ -1,0 +1,7 @@
+#client_secret                 = "DO NOT INSERT IN REPO FILES"
+prefix                        = "Lab99"
+poste_resource_group_location = "North Europe"
+environment                   = "staging"
+
+tag_poste2 = { "environment" : "staging", "user" : "lab00" }
+
