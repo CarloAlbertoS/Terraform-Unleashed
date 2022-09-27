@@ -1,0 +1,16 @@
+#azclientsecret                 = "DO NOT INSERT IN REPO FILES"
+azsubscriptionid      = "fce6ec9b-1a97-4250-8ca9-6ea5cf77fe6c"
+azclientid            = "c2e6638d-61d7-4f66-9ae4-ecb579a3789e"
+aztenantid            = "a84c2bdc-6bba-49a2-a40f-8e993440da8e"
+prefix                = "poste-tf"
+location              = "North Europe"
+environment           = "lab99"
+user                  = "lab-user-99@veraunohotmail.onmicrosoft.com"
+vnet_cidr             = ["172.16.0.0/16"]
+subnets_cidr_database = ["172.16.2.0/24"]
+subnets_cidr_webapp   = ["172.16.4.0/24"]
+vm_size               = "Standard_B1s"
+vm_os_sku             = "18.04-LTS"
+
+#tag_poste2 = { "environment" : "staging", "user" : "lab00" }
+
