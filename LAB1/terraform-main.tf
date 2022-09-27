@@ -34,7 +34,7 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
-resource "azurerm_virtual_machine" "main" {
+resource "azurerm_virtual_machine" "database" {
   name                  = "poste-tf-vm"
   location              = azurerm_resource_group.poste-tf.location
   resource_group_name   = azurerm_resource_group.poste-tf.name
@@ -50,7 +50,7 @@ resource "azurerm_virtual_machine" "main" {
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
   storage_os_disk {
