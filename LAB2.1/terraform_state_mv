@@ -1,0 +1,5 @@
+terraform state mv azurerm_virtual_network.main-vnet module.network.azurerm_virtual_network.main-vnet
+
+terraform state mv 'azurerm_subnet.database' 'module.network.azurerm_subnet.subnets[0]'
+
+terraform state mv 'azurerm_subnet.webapp' 'module.network.azurerm_subnet.subnets[1]'
