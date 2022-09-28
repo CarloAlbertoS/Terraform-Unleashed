@@ -1,4 +1,9 @@
 
+variable "user" {
+  description = "name of the User for poste terraform course"
+}
+
+
 variable "environment" {
   description = "name of the User for poste terraform course"
 }

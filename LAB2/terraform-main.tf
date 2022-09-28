@@ -1,4 +1,23 @@
 
+#################### AZUREAD BLOCK ####################
+
+data "azuread_user" "lab-user" {
+  user_principal_name = var.user
+}
+
+data "azuread_group" "azure-group" {
+  display_name     = "GlobalContributors"
+  security_enabled = true
+}
+
+resource "azuread_group_member" "lab-assignment" {
+  group_object_id  = data.azuread_group.azure-group.id
+  member_object_id = data.azuread_user.lab-user.id
+}
+#################### END OF AZUREAD BLOCK ####################
+
+
+
 resource "azurerm_resource_group" "main-rg" {
   name     = "${local.alumni_id}-resources"
   location = var.location
