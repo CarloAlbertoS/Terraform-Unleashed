@@ -1,0 +1,9 @@
+#azclientsecret                 = "DO NOT INSERT IN REPO FILES"
+prefix                        = "poste-tf"
+poste_resource_group_location = "North Europe"
+environment                   = "lab99"
+user ="lab-user-99@veraunohotmail.onmicrosoft.com"
+vnet_cidr   = ["172.16.0.0/16"]
+
+tag_poste2 = { "environment" : "staging", "user" : "lab00" }
+
