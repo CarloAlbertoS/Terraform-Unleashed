@@ -11,5 +11,8 @@ subnets_cidr_database = ["172.16.2.0/24"]
 subnets_cidr_webapp   = ["172.16.4.0/24"]
 vm_size               = "Standard_B1s"
 vm_os_sku             = "18.04-LTS"
+ubnets_cidr = [{ip=["172.16.2.0/24"],name="database"},{ip=["172.16.4.0/24"],name="webapp"}]
+
+resource_groups =  [{name="resources"}]
 
 #tag_poste2 = { "environment" : "staging", "user" : "lab00" }
