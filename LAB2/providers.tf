@@ -3,9 +3,6 @@ terraform {
     azurerm = {
       version = "3.4.0"
     }
-    azuread = {
-      version = "2.18.0"
-    }
   }
 }
 
@@ -22,13 +19,6 @@ provider "azurerm" {
   tenant_id       = var.aztenantid
 }
 
-
-provider "azuread" {
-  client_id     = var.azclientid
-  client_secret = var.azclientsecret
-  tenant_id     = var.aztenantid
-
-}
 
 provider "random" {
 }
