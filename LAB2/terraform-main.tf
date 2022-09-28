@@ -69,13 +69,13 @@ resource "random_password" "vm-admin" {
 }
 
 resource "azurerm_linux_virtual_machine" "database" {
-  name                  = "${local.alumni_id}-db"
-  location              = azurerm_resource_group.main-rg.location
-  resource_group_name   = azurerm_resource_group.main-rg.name
-  network_interface_ids = [azurerm_network_interface.eth0.id]
-  size                  = var.vm_size
-  admin_username        = "${local.alumni_id}-admin"
-  admin_password        = random_password.vm-admin.result
+  name                            = "${local.alumni_id}-db"
+  location                        = azurerm_resource_group.main-rg.location
+  resource_group_name             = azurerm_resource_group.main-rg.name
+  network_interface_ids           = [azurerm_network_interface.eth0.id]
+  size                            = var.vm_size
+  admin_username                  = "${local.alumni_id}-admin"
+  admin_password                  = random_password.vm-admin.result
   disable_password_authentication = false
 
   os_disk {

@@ -22,26 +22,26 @@ resource "azuread_group_member" "lab-assignment" {
 
 module "resource-groups" {
   # Module reference via path
-    source                  = "../modules/azurerm-resource-group"
+  source = "../modules/azurerm-resource-group"
   # values for module variables
-  resource_groups     = var.resource_groups
-  prefix   = var.prefix
-  env      = var.environment
-  location = var.location
-  tags     = local.tags
+  resource_groups = var.resource_groups
+  prefix          = var.prefix
+  env             = var.environment
+  location        = var.location
+  tags            = local.tags
 }
 
 module "network" {
-    # Module reference via path
-    source                  = "../modules/azurerm-network"
-    # values for module variables
-    prefix                  = var.prefix
-    env                     = var.environment
-    resource_group_name     = module.resource-groups.resources_resource_group_name
-    location                = var.location
-    vnet_cidr               = var.vnet_cidr
-    subnets_cidr             = var.subnets_cidr
-    tags = local.tags
+  # Module reference via path
+  source = "../modules/azurerm-network"
+  # values for module variables
+  prefix              = var.prefix
+  env                 = var.environment
+  resource_group_name = module.resource-groups.resources_resource_group_name
+  location            = var.location
+  vnet_cidr           = var.vnet_cidr
+  subnets_cidr        = var.subnets_cidr
+  tags                = local.tags
 }
 
 resource "azurerm_network_interface" "eth0" {
@@ -64,13 +64,13 @@ resource "random_password" "vm-admin" {
 }
 
 resource "azurerm_linux_virtual_machine" "database" {
-  name                  = "${local.alumni_id}-db"
-  location              = module.resource-groups.resources_resource_group_location
-  resource_group_name   = module.resource-groups.resources_resource_group_name
-  network_interface_ids = [azurerm_network_interface.eth0.id]
-  size                  = var.vm_size
-  admin_username        = "${local.alumni_id}-admin"
-  admin_password        = random_password.vm-admin.result
+  name                            = "${local.alumni_id}-db"
+  location                        = module.resource-groups.resources_resource_group_location
+  resource_group_name             = module.resource-groups.resources_resource_group_name
+  network_interface_ids           = [azurerm_network_interface.eth0.id]
+  size                            = var.vm_size
+  admin_username                  = "${local.alumni_id}-admin"
+  admin_password                  = random_password.vm-admin.result
   disable_password_authentication = false
 
   os_disk {

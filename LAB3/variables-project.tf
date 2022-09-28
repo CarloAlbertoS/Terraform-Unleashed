@@ -26,3 +26,7 @@ variable "override_special" {
   description = "Supply your own list of special characters to use for string generation"
   default     = "_.!"
 }
+
+variable "tenantdomain" {
+  description = "The default email domain for the tenant in Azure Active Directory"
+}

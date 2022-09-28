@@ -1,0 +1,8 @@
+global:
+  namespace: default
+azurefile:
+  storage:
+    sharename: default
+    key: default
+    accountname: default
+    quota: 10Gi

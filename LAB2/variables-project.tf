@@ -19,7 +19,7 @@ variable "location" {
 
 variable "locationcode" {
   description = "The Azure Region in which all resources in this example should be provisioned (two letters version used on names)"
-default     = "ne"
+  default     = "ne"
 }
 
 
