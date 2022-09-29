@@ -30,6 +30,10 @@ provider "azuread" {
 
 }
 
+provider "null" {
+}
+
+
 provider "random" {
 }
 

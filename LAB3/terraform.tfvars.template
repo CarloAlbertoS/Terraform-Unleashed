@@ -15,7 +15,8 @@ subnets_cidr = [{ip=["172.16.2.0/24"],name="aks"},{ip=["172.16.4.0/24"],name="we
 
 resource_groups =  [{name="resources"}]
 
-azurerm-fileshare-azureshares = { "userdata" : "5", "logs" : "5" }
+azurerm-fileshare-azureshares = { "userdata-lab99" : "5", "logs-lab99" : "5" }
+azurem-disk-azuredisk = { "db-data-lab99" : "5", "appdata-lab99" : "5" }
 
 certmanager-emailstaging        = "noreply@poste.it"
 certmanager-emailproduction     = "noreply@poste.it"
