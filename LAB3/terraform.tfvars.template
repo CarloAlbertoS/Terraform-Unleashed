@@ -24,3 +24,8 @@ tenantdomain                    = "poste.it"
 aks_sp_application_id           = "c2e6638d-61d7-4f66-9ae4-ecb579a3789e"
 aks_sp_pwd_secret               = "DO NOT INSERT IN REPO FILES"
 #tag_poste2 = { "environment" : "staging", "user" : "lab00" }
+
+admin_group_objects_ids         = ["00000000-0000-0000-0000-00000000", "00000000-0000-0000-0000-00000000"]
+api_server_authorized_ip_ranges = ["0.0.0.0/0"]
+
+orchestrator_version = "1.24.3"
