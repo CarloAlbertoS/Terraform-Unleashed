@@ -1,8 +1,8 @@
 resource "helm_release" "azure-file-pvc" {
-  name  = "azure-file-pvc-${var.sharename}"
-  chart = "azure-file-pvc"
+  name       = "azure-file-pvc-${var.sharename}"
+  chart      = "azure-file-pvc"
   repository = "../modules/azure-file-pvc"
-  timeout = 600
+  timeout    = 600
 
   set {
     name  = "global.namespace"

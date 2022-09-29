@@ -1,6 +1,6 @@
 variable "namespace" {
   description = "The name of the namespace used"
-  default = "ingress-nginx"
+  default     = "ingress-nginx"
 }
 
 variable "aksnoderg" {

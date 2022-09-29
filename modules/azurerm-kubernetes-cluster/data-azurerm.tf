@@ -1,3 +1,3 @@
 data "azurerm_subscription" "current" {
-    subscription_id = var.azsubscriptionid
+  subscription_id = var.azsubscriptionid
 }

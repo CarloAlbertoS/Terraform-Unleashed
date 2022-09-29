@@ -34,8 +34,8 @@ provider "random" {
 }
 
 provider "kubernetes" {
-  version = "2.8.0"
-     host                   = module.kubernetes.host
+  version                = "2.8.0"
+  host                   = module.kubernetes.host
   username               = module.kubernetes.aksusername
   password               = module.kubernetes.akspassword
   client_certificate     = base64decode(module.kubernetes.client_certificate)
@@ -49,14 +49,14 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-    kubernetes {
-     host                   = module.kubernetes.host
+  kubernetes {
+    host                   = module.kubernetes.host
     username               = module.kubernetes.aksusername
     password               = module.kubernetes.akspassword
     client_certificate     = base64decode(module.kubernetes.client_certificate)
     client_key             = base64decode(module.kubernetes.client_key)
     cluster_ca_certificate = base64decode(module.kubernetes.cluster_ca_certificate)
-}
+  }
 
   /* in case of problems replace with this:
   kubernetes {

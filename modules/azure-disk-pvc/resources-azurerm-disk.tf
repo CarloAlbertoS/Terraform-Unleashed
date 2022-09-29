@@ -8,6 +8,6 @@ resource "azurerm_managed_disk" "azure-disk" {
 
   tags = {
     project = var.prefix
-    env = var.env
+    env     = var.env
   }
 }

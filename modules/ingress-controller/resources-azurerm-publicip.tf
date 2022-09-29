@@ -8,6 +8,6 @@ resource "azurerm_public_ip" "ingress" {
 
   tags = {
     project = var.prefix
-    env = var.env
+    env     = var.env
   }
 }

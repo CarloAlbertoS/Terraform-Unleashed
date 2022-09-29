@@ -125,9 +125,9 @@ module "azure_file_share" {
   source               = "../modules/azurerm-fileshare"
   azureshares          = var.azurerm-fileshare-azureshares
   storage_account_name = "postetf"
-  location                        = module.resource-groups.resources_resource_group_location
-  prefix              = var.prefix
-  env                 = var.environment
+  location             = module.resource-groups.resources_resource_group_location
+  prefix               = var.prefix
+  env                  = var.environment
 
   depends_on = [
     module.kubernetes

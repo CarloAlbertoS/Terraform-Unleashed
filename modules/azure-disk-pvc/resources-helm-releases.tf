@@ -1,8 +1,8 @@
 resource "helm_release" "azure-disk-pvc" {
-  name  = "azure-disk-pvc-${var.diskname}"
-  chart = "azure-disk-pvc"
+  name       = "azure-disk-pvc-${var.diskname}"
+  chart      = "azure-disk-pvc"
   repository = "../modules/azure-disk-pvc"
-  timeout = 600
+  timeout    = 600
 
   set {
     name  = "global.namespace"

@@ -90,7 +90,7 @@ variable "availability_zones" {
 
 variable "default_node_pool_name" {
   description = "Name for the default node pool"
-  default = "default"
+  default     = "default"
 }
 
 variable "aks_sp_application_id" {
