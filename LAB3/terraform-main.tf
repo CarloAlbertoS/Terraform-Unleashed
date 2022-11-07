@@ -124,7 +124,7 @@ module "azure_file_share" {
   # Module reference via path
   source               = "../modules/azurerm-fileshare"
   azureshares          = var.azurerm-fileshare-azureshares
-  storage_account_name = "postetf"
+  storage_account_name = "trainingtf"
   location             = module.resource-groups.resources_resource_group_location
   prefix               = var.prefix
   env                  = var.environment

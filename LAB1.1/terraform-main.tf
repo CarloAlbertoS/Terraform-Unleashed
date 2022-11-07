@@ -1,29 +1,44 @@
-provider "azurerm" {
-  features {}
+locals {
+  alumni_id = "${var.course}-${var.prefix}"
+  tag_training = {
+    "environment" = "${var.environment}"
+    "user"        = "${var.prefix}"
+  }
 }
 
+
 resource "azurerm_resource_group" "training-tf" {
-  name     = "training-userxx-tf-resources"
-  location = "North Europe"
+  name     = "${local.alumni_id}-resources"
+  location = var.training_resource_group_location
+  tags     = var.tag_training
 }
 
 resource "azurerm_virtual_network" "training-tf" {
-  name                = "training-userxx-tf-network"
+  name                = "${local.alumni_id}-network"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.training-tf.location
   resource_group_name = azurerm_resource_group.training-tf.name
+  tags                = var.tag_training
 }
 
 resource "azurerm_subnet" "database" {
-  name                 = "database"
+  name                 = "${local.alumni_id}-database"
   resource_group_name  = azurerm_resource_group.training-tf.name
   virtual_network_name = azurerm_virtual_network.training-tf.name
   address_prefixes     = ["10.0.2.0/24"]
+
+}
+
+resource "azurerm_subnet" "webapp" {
+  name                 = "${local.alumni_id}-webapp"
+  resource_group_name  = azurerm_resource_group.training-tf.name
+  virtual_network_name = azurerm_virtual_network.training-tf.name
+  address_prefixes     = ["10.0.4.0/24"]
 }
 
 
 resource "azurerm_network_interface" "main" {
-  name                = "training-tf-nic"
+  name                = "${local.alumni_id}-nic"
   location            = azurerm_resource_group.training-tf.location
   resource_group_name = azurerm_resource_group.training-tf.name
 
@@ -32,25 +47,28 @@ resource "azurerm_network_interface" "main" {
     subnet_id                     = azurerm_subnet.database.id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = var.tag_training
 }
 
-resource "azurerm_virtual_machine" "main" {
-  name                  = "training-userxx-tf-vm"
+
+
+resource "azurerm_virtual_machine" "database" {
+  name                  = "${local.alumni_id}-vm"
   location              = azurerm_resource_group.training-tf.location
   resource_group_name   = azurerm_resource_group.training-tf.name
   network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = "Standard_B1s"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
-  # delete_os_disk_on_termination = true
+  delete_os_disk_on_termination = true
 
   # Uncomment this line to delete the data disks automatically when deleting the VM
-  # delete_data_disks_on_termination = true
+  delete_data_disks_on_termination = true
 
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
   storage_os_disk {
@@ -58,6 +76,7 @@ resource "azurerm_virtual_machine" "main" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
+
   }
   os_profile {
     computer_name  = "hostname"
@@ -67,7 +86,5 @@ resource "azurerm_virtual_machine" "main" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-  tags = {
-    environment = "test"
-  }
+  tags = var.tag_training
 }

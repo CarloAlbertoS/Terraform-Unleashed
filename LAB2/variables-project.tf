@@ -1,15 +1,15 @@
 
 variable "user" {
-  description = "name of the User for poste terraform course"
+  description = "name of the User for training terraform course"
 }
 
 
 variable "environment" {
-  description = "name of the User for poste terraform course"
+  description = "name of the User for training terraform course"
 }
 
 variable "prefix" {
-  description = "name of the User for poste terraform course"
+  description = "name of the User for training terraform course"
 }
 
 variable "location" {
