@@ -1,7 +1,0 @@
-#client_secret                 = "DO NOT INSERT IN REPO FILES"
-prefix                        = "Lab99"
-training_resource_group_location = "North Europe"
-environment                   = "staging"
-
-tag_training2 = { "environment" : "staging", "user" : "lab00" }
-
