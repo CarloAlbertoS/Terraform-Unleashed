@@ -1,0 +1,6 @@
+global:
+  namespace: default
+azuredisk:
+  storage:
+    diskname: default
+    quota: 10Gi

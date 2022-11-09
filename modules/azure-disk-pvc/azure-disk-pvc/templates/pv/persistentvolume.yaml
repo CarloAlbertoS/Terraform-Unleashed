@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.azuredisk.storage.diskname }}
+spec:
+  capacity:
+    storage: {{ .Values.azuredisk.storage.quota }}
+  storageClassName: managed-premium
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+     namespace: {{ .Values.global.namespace }}
+     name: {{ .Values.azuredisk.storage.diskname }}
+  azureDisk:
+    kind: Managed
+    diskName: {{ .Values.azuredisk.storage.diskname }}
+    diskURI:  {{ .Values.azuredisk.storage.diskuri }}
